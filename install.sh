@@ -24,13 +24,10 @@
 # Specify what versions of dependencies to download/install
 #
 
-# tar.bz2 sources
-GMPSRC="http://mirror.team-cymru.org/gnu/gmp/gmp-6.1.2.tar.bz2"
-
-# tar.gz sources
-MPFRSRC="http://www.mpfr.org/mpfr-3.1.5/mpfr-3.1.5.tar.gz"
-EIGSRC="http://bitbucket.org/eigen/eigen/get/3.3.3.tar.gz"
-MPREALSRC="https://bitbucket.org/advanpix/mpreal/get/mpfrc++-3.6.5.tar.gz"
+GMPSRC="informME_dependences/gmp-6.1.2.tar.bz2"
+MPFRSRC="informME_dependences/mpfr-3.1.5.tar.gz" 
+EIGSRC="informME_dependences/eigen-3.3.3.tar.bz2"
+MPREALSRC="informME_dependences/mpreal-mpfrc-3.6.5.tar.gz"
 
 
 #
@@ -127,8 +124,10 @@ else
     mkdir share
     mkdir src 
     cd src
-    wget $GMPSRC
-    wget $MPFRSRC
+#    wget $GMPSRC
+#    wget $MPFRSRC
+    cp ${INFORMMEDIR}/${GMPSRC} .
+    cp ${INFORMMEDIR}/${MPFRSRC} .
     mkdir $GMPDIR/src/gmp
     tar -xjf *gmp*tar* -C $GMPDIR/src/gmp --strip-components=1
     mkdir $GMPDIR/src/mpfr
@@ -186,13 +185,16 @@ else
         mkdir informMEdeps
     fi
     cd informMEdeps
-    wget --no-check-certificate $EIGSRC    
+#    wget --no-check-certificate $EIGSRC    
+    cp ${INFORMMEDIR}/${EIGSRC} .
     EIGDIR=$EIGDIR/informMEdeps/eigen
     mkdir $EIGDIR
-    tar -xzf *tar.gz -C $EIGDIR --strip-components=1
+#    tar -xzf *tar.gz -C $EIGDIR --strip-components=1
+    tar -xjf *tar.bz2 -C $EIGDIR --strip-components=1
     cd $EIGDIR
     cp unsupported/Eigen/MPRealSupport Eigen/MPRealSupport
-    wget --no-check-certificate $MPREALSRC 
+#    wget --no-check-certificate $MPREALSRC 
+    cp ${INFORMMEDIR}/${MPREALSRC} .
     mkdir $EIGDIR/mpreal
     tar -xzf *mp*tar.gz -C $EIGDIR/mpreal --strip-components=1
     cp $EIGDIR/mpreal/mpreal.h $EIGDIR/mpreal.h
